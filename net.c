@@ -38,7 +38,11 @@
 #include <sys/select.h>
 #include <sys/un.h>
 #include <netinet/in.h>
+
+#ifndef __CYGWIN__
 #include <netinet/tcp.h>
+#endif
+
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <fcntl.h>
@@ -50,6 +54,13 @@
 #include <poll.h>
 #include <limits.h>
 #include <stdlib.h>
+
+#ifdef __CYGWIN__
+#define TCP_KEEPCNT 8
+#define TCP_KEEPINTVL 150
+#define TCP_KEEPIDLE 14400
+#endif
+
 
 #include "net.h"
 #include "sds.h"
